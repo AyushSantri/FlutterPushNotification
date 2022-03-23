@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
+import 'package:push_notification_firebase/local_notification.dart';
 import 'package:push_notification_firebase/model/pushnotification_model.dart';
 import 'package:push_notification_firebase/notification_badge.dart';
 
@@ -15,6 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
+    LocalNotificationService.initialize();
     //FOR background message / when app is in background
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       PushNotification notification = PushNotification(
@@ -46,8 +48,6 @@ class _HomePageState extends State<HomePage> {
 
   //register Notification
   void registerNotification() async {
-    await Firebase.initializeApp();
-    //creating instance of firebase messaging
     _messaging = FirebaseMessaging.instance;
 
     //generated the permissions
@@ -81,6 +81,8 @@ class _HomePageState extends State<HomePage> {
             subtitle: Text("${_notificationInfo!.body}"),
             background: Colors.cyan.shade700,
             duration: const Duration(seconds: 10));
+
+        LocalNotificationService.showNotificationOnForeground(message);
       });
     } else {
       print("Permission Declined");
@@ -89,7 +91,6 @@ class _HomePageState extends State<HomePage> {
 
   //checking for initial message that we receive
   checkForInitialMessage() async {
-    await Firebase.initializeApp();
     RemoteMessage? initialMessage =
         await FirebaseMessaging.instance.getInitialMessage();
 
