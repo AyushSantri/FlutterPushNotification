@@ -72,6 +72,11 @@ class _HomePageState extends State<HomePage> {
               'Flutter Push Notification',
               style: TextStyle(color: Colors.black, fontSize: 24),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+
+            //we will be counting the notification we receive via badge
             NotificationBadge(totalNotification: _totalNotificationCounter),
           ],
         ),
