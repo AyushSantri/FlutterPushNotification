@@ -36,10 +36,16 @@ class _HomePageState extends State<HomePage> {
 
         //saved the message to model
         PushNotification notification = PushNotification(
-            title: message.notification!.title.toString(),
-            body: message.notification!.body.toString(),
-            dataTitle: message.data['title'],
-            dataBody: message.data['body']);
+          title: message.notification!.title.toString(),
+          body: message.notification!.body.toString(),
+          dataTitle: message.data['title'],
+          dataBody: message.data['body'],
+        );
+
+        setState(() {
+          _notificationInfo = notification;
+          _totalNotificationCounter++;
+        });
       });
     }
   }
