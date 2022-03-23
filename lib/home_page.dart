@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
 
   //register Notification
   void registerNotification() async {
+    await Firebase.initializeApp();
     //creating instance of firebase messaging
     _messaging = FirebaseMessaging.instance;
 
@@ -45,8 +47,8 @@ class _HomePageState extends State<HomePage> {
 
         //saved the message to model
         PushNotification notification = PushNotification(
-          title: message.notification!.title.toString(),
-          body: message.notification!.body.toString(),
+          title: message.notification!.title,
+          body: message.notification!.body,
           dataTitle: message.data['title'],
           dataBody: message.data['body'],
         );
@@ -55,16 +57,15 @@ class _HomePageState extends State<HomePage> {
           _notificationInfo = notification;
           _totalNotificationCounter++;
         });
-
+        print("hello");
+        print(notification.body);
         //if notification received from firebase is not null then go for overlay support
-        if (notification != null) {
-          showSimpleNotification(Text(_notificationInfo!.title),
-              leading: NotificationBadge(
-                  totalNotification: _totalNotificationCounter),
-              subtitle: Text(_notificationInfo!.body),
-              background: Colors.cyan.shade700,
-              duration: const Duration(seconds: 4));
-        }
+        showSimpleNotification(Text("${_notificationInfo!.title}"),
+            leading:
+                NotificationBadge(totalNotification: _totalNotificationCounter),
+            subtitle: Text("${_notificationInfo!.body}"),
+            background: Colors.cyan.shade700,
+            duration: const Duration(seconds: 10));
       });
     } else {
       print("Permission Declined");
@@ -97,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                 ? Column(
                     children: [
                       Text(
-                        "TITLE : ${_notificationInfo!.dataTitle}",
+                        "TITLE : ${_notificationInfo!.title}",
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
                       ),
@@ -105,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                         height: 10,
                       ),
                       Text(
-                        "TITLE : ${_notificationInfo!.dataBody + _notificationInfo!.body}",
+                        "TITLE : ${_notificationInfo!.body}",
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
                       )

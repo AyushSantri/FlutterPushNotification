@@ -1,8 +1,8 @@
 class PushNotification {
-  final String title;
-  final String body;
-  final String dataTitle;
-  final String dataBody;
+  String? title;
+  String? body;
+  String? dataTitle;
+  String? dataBody;
 
   PushNotification(
       {required this.title,
