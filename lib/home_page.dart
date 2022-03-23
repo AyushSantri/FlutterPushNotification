@@ -29,6 +29,18 @@ class _HomePageState extends State<HomePage> {
     //check if user has granted the particular permission
     if (_settings.authorizationStatus == AuthorizationStatus.authorized) {
       print("User Granted Permission");
+
+      //main message would be send from here
+      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+        //Remote message is message from firebase server
+
+        //saved the message to model
+        PushNotification notification = PushNotification(
+            title: message.notification!.title.toString(),
+            body: message.notification!.body.toString(),
+            dataTitle: message.data['title'],
+            dataBody: message.data['body']);
+      });
     }
   }
 
