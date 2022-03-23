@@ -52,6 +52,16 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("Push Notification"),
+      ),
+      body: Center(
+        child: Column(
+          children: [],
+        ),
+      ),
+    );
   }
 }
