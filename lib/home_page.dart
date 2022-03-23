@@ -17,6 +17,9 @@ class _HomePageState extends State<HomePage> {
   //calling model
   PushNotification? _notificationInfo;
 
+  //register Notification
+  void registerNotification() async {}
+
   @override
   Widget build(BuildContext context) {
     return Container();
