@@ -18,7 +18,10 @@ class _HomePageState extends State<HomePage> {
   PushNotification? _notificationInfo;
 
   //register Notification
-  void registerNotification() async {}
+  void registerNotification() async {
+    //creating instance of firebase messaging
+    _messaging = FirebaseMessaging.instance;
+  }
 
   @override
   Widget build(BuildContext context) {
