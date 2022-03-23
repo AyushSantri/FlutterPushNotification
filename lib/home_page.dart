@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:push_notification_firebase/model/pushnotification_model.dart';
+import 'package:push_notification_firebase/notification_badge.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,6 +11,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    _totalNotificationCounter = 0;
+    super.initState();
+  }
+
   //initializing FirebaseMessaging
   late final FirebaseMessaging _messaging;
   late int _totalNotificationCounter;
@@ -60,11 +67,12 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text(
+          children: [
+            const Text(
               'Flutter Push Notification',
               style: TextStyle(color: Colors.black, fontSize: 24),
-            )
+            ),
+            NotificationBadge(totalNotification: _totalNotificationCounter),
           ],
         ),
       ),
