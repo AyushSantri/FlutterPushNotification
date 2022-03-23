@@ -78,6 +78,26 @@ class _HomePageState extends State<HomePage> {
 
             //we will be counting the notification we receive via badge
             NotificationBadge(totalNotification: _totalNotificationCounter),
+
+            _notificationInfo != null
+                ? Column(
+                    children: [
+                      Text(
+                        "TITLE : ${_notificationInfo!.dataTitle}",
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "TITLE : ${_notificationInfo!.dataBody + _notificationInfo!.body}",
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16),
+                      )
+                    ],
+                  )
+                : Container(),
           ],
         ),
       ),
