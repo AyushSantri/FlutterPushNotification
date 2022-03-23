@@ -1,5 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:push_notification_firebase/model/pushnotification_model.dart';
 import 'package:push_notification_firebase/notification_badge.dart';
 
@@ -54,7 +55,19 @@ class _HomePageState extends State<HomePage> {
           _notificationInfo = notification;
           _totalNotificationCounter++;
         });
+
+        //if notification received from firebase is not null then go for overlay support
+        if (notification != null) {
+          showSimpleNotification(Text(_notificationInfo!.title),
+              leading: NotificationBadge(
+                  totalNotification: _totalNotificationCounter),
+              subtitle: Text(_notificationInfo!.body),
+              background: Colors.cyan.shade700,
+              duration: const Duration(seconds: 4));
+        }
       });
+    } else {
+      print("Permission Declined");
     }
   }
 
