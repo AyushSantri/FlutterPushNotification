@@ -25,6 +25,11 @@ class _HomePageState extends State<HomePage> {
     //generated the permissions
     NotificationSettings _settings = await _messaging.requestPermission(
         alert: true, sound: true, badge: true, provisional: true);
+
+    //check if user has granted the particular permission
+    if (_settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print("User Granted Permission");
+    }
   }
 
   @override
