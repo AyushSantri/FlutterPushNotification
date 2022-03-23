@@ -59,7 +59,13 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Center(
         child: Column(
-          children: [],
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              'Flutter Push Notification',
+              style: TextStyle(color: Colors.black, fontSize: 24),
+            )
+          ],
         ),
       ),
     );
