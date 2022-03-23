@@ -21,6 +21,10 @@ class _HomePageState extends State<HomePage> {
   void registerNotification() async {
     //creating instance of firebase messaging
     _messaging = FirebaseMessaging.instance;
+
+    //generated the permissions
+    NotificationSettings _settings = await _messaging.requestPermission(
+        alert: true, sound: true, badge: true, provisional: true);
   }
 
   @override
