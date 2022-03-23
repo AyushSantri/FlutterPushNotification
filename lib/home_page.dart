@@ -15,7 +15,26 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
+    //FOR background message / when app is in background
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      PushNotification notification = PushNotification(
+        title: message.notification!.title,
+        body: message.notification!.body,
+        dataTitle: message.data['title'],
+        dataBody: message.data['body'],
+      );
+
+      setState(() {
+        _notificationInfo = notification;
+        _totalNotificationCounter++;
+      });
+    });
+
+    //when app is running
     registerNotification();
+
+    //when app is terminated
+    checkForInitialMessage();
     _totalNotificationCounter = 0;
     super.initState();
   }
@@ -69,6 +88,27 @@ class _HomePageState extends State<HomePage> {
       });
     } else {
       print("Permission Declined");
+    }
+  }
+
+  //checking for initial message that we receive
+  checkForInitialMessage() async {
+    await Firebase.initializeApp();
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
+
+    if (initialMessage != null) {
+      PushNotification notification = PushNotification(
+        title: initialMessage.notification!.title,
+        body: initialMessage.notification!.body,
+        dataTitle: initialMessage.data['title'],
+        dataBody: initialMessage.data['body'],
+      );
+
+      setState(() {
+        _notificationInfo = notification;
+        _totalNotificationCounter++;
+      });
     }
   }
 
