@@ -20,8 +20,6 @@ class _HomePageState extends State<HomePage> {
       PushNotification notification = PushNotification(
         title: message.notification!.title,
         body: message.notification!.body,
-        dataTitle: message.data['title'],
-        dataBody: message.data['body'],
       );
 
       setState(() {
@@ -68,8 +66,6 @@ class _HomePageState extends State<HomePage> {
         PushNotification notification = PushNotification(
           title: message.notification!.title,
           body: message.notification!.body,
-          dataTitle: message.data['title'],
-          dataBody: message.data['body'],
         );
 
         setState(() {
@@ -101,8 +97,6 @@ class _HomePageState extends State<HomePage> {
       PushNotification notification = PushNotification(
         title: initialMessage.notification!.title,
         body: initialMessage.notification!.body,
-        dataTitle: initialMessage.data['title'],
-        dataBody: initialMessage.data['body'],
       );
 
       setState(() {
