@@ -13,6 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
+    registerNotification();
     _totalNotificationCounter = 0;
     super.initState();
   }
