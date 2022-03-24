@@ -6,7 +6,7 @@ class LocalNotificationService {
       FlutterLocalNotificationsPlugin();
 
   static void initialize() {
-    final InitializationSettings initializationSettings =
+    const InitializationSettings initializationSettings =
         InitializationSettings(
             android: AndroidInitializationSettings("@mipmap/ic_launcher"));
     _notificationsPlugin.initialize(initializationSettings,
@@ -16,13 +16,18 @@ class LocalNotificationService {
   }
 
   static void showNotificationOnForeground(RemoteMessage message) {
-    final notificationDetail = NotificationDetails(
+    const notificationDetail = NotificationDetails(
         android: AndroidNotificationDetails(
-            "com.example.push_notification_firebase",
-            "push_notification_firebase",
-            importance: Importance.max,
-            priority: Priority.high,
-            playSound: true));
+      "com.example.push_notification_firebase",
+      "push_notification_firebase",
+      importance: Importance.max,
+      priority: Priority.high,
+      fullScreenIntent: true,
+      playSound: true,
+      enableLights: true,
+      enableVibration: true,
+      visibility: NotificationVisibility.public,
+    ));
 
     _notificationsPlugin.show(
         DateTime.now().microsecond,
